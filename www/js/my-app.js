@@ -13,6 +13,10 @@ var mainView = myApp.addView('.view-main', {
 
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
+
+    $$(".page-content").css("padding-top", "44px");
+    $$(".page-content").css("padding-bottom", "44px");
+    $$(".page-content").css("overflow", "auto");
 });
 
 myApp.onPageAfterAnimation('recorrido1', function (page) {})
@@ -91,9 +95,9 @@ $$(document).on('pageAfterAnimation',function(e){
         document.addEventListener("mousemove", onDocumentMouseMove, false);
         document.addEventListener("mouseup", onDocumentMouseUp, false);      
 
-        document.addEventListener("touchstart", onDocumentTouchDown, false);
+        document.addEventListener("touchend", onDocumentTouchDown, false);
         document.addEventListener("touchmove", onDocumentTouchMove, false);
-        document.addEventListener("touchend", onDocumentTouchUp, false);               
+        document.addEventListener("touchstart", onDocumentTouchUp, false);               
 						
         render();
             
@@ -191,10 +195,9 @@ $$(document).on('pageAfterAnimation',function(e){
 $$(document).on('pageAfterBack', function (e) {
     
     var page = e.detail.page;
-
-    if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){
-        $$(".page-content").css("padding-top", "44px");
-        $$(".page-content").css("padding-bottom", "44px");
-        $$(".page-content").css("overflow", "auto");
-    }
+    
+    $$(".page-content").css("padding-top", "44px");
+    $$(".page-content").css("padding-bottom", "44px");
+    $$(".page-content").css("overflow", "auto");
+    
 })
