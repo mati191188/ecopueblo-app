@@ -7,8 +7,7 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
     // Because we want to use dynamic navbar, we need to enable it for this view:
-    dynamicNavbar: true,    
-    tapHold: true,
+    dynamicNavbar: true    
 });
 
 $$(document).on('deviceready', function() {
@@ -32,6 +31,8 @@ myApp.onPageAfterBack('recorrido4', function (page) {})
 $$(document).on('pageInit', function (e) {
     
     var page = e.detail.page;
+
+
 })
 
 $$(document).on('pageAfterAnimation',function(e){
@@ -95,9 +96,9 @@ $$(document).on('pageAfterAnimation',function(e){
         document.addEventListener("mousemove", onDocumentMouseMove, false);
         document.addEventListener("mouseup", onDocumentMouseUp, false);      
 
-        document.addEventListener("touchend", onDocumentTouchDown, false);
+        document.addEventListener("touchstart", onDocumentTouchDown, false);
         document.addEventListener("touchmove", onDocumentTouchMove, false);
-        document.addEventListener("touchstart", onDocumentTouchUp, false);               
+        document.addEventListener("touchend", onDocumentTouchUp, false);               
 						
         render();
             
