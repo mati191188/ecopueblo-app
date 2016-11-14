@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="com.ecopueblo2.app" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>ecopueblo2</name>
+    <name>Ecopueblo</name>
     <description>
-        A basic Framework7 template for PhoneGap.
+        App para los vendedores de loteos en Ecopueblo
     </description>
     <author email="dev@cordova.apache.org" href="http://cordova.io">
-        Apache Cordova Team
+        Alpha Social Marketing
     </author>
     <content src="index.html" />
     <access origin="*" />
