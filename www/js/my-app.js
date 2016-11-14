@@ -89,6 +89,8 @@ $$(document).on('pageAfterAnimation',function(e){
         document.addEventListener("mousedown", onDocumentMouseDown, false);
         document.addEventListener("mousemove", onDocumentMouseMove, false);
         document.addEventListener("mouseup", onDocumentMouseUp, false);
+
+        document.addEventListener("swipe", onSwipe, false)        
 						
         render();
             
@@ -137,6 +139,14 @@ $$(document).on('pageAfterAnimation',function(e){
                 latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
             }
 
+        }
+
+        function onSwipe(event){
+          
+            if(manualControl){
+                longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
+                latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
+            }  
         }
 
         // when the mouse is released, we turn manual control off

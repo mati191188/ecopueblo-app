@@ -8,7 +8,7 @@
         Alpha Social Marketing
     </author>
     <content src="index.html" />
-    <icon src="img/logo.png"/>    
+    <icon src="img/logo-isotipo.png"/>    
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
