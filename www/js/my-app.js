@@ -14,9 +14,15 @@ $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 });
 
-myApp.onPageInit('about', function (page) {})
 myApp.onPageAfterAnimation('recorrido1', function (page) {})
+myApp.onPageAfterAnimation('recorrido2', function (page) {})
+myApp.onPageAfterAnimation('recorrido3', function (page) {})
+myApp.onPageAfterAnimation('recorrido4', function (page) {})
+
 myApp.onPageAfterBack('recorrido1', function (page) {})
+myApp.onPageAfterBack('recorrido2', function (page) {})
+myApp.onPageAfterBack('recorrido3', function (page) {})
+myApp.onPageAfterBack('recorrido4', function (page) {})
 
 $$(document).on('pageInit', function (e) {
     
@@ -26,8 +32,21 @@ $$(document).on('pageInit', function (e) {
 $$(document).on('pageAfterAnimation',function(e){
 
     var page= e.detail.page;
+    var img_name = null;
 
-    if(page.name === 'recorrido1'){
+    if(page.name === 'recorrido1')
+        var img_name = "img/360/01.jpg";
+
+    if(page.name === 'recorrido2')
+        var img_name = "img/360/02.jpg";
+
+    if(page.name === 'recorrido3')
+        var img_name = "img/360/03.jpg";
+
+    if(page.name === 'recorrido4')
+        var img_name = "img/360/04.jpg";
+
+    if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){
 
         var manualControl = false;
         var longitude = 0;
@@ -60,7 +79,7 @@ $$(document).on('pageAfterAnimation',function(e){
 
         // creation of the sphere material
         var sphereMaterial = new THREE.MeshBasicMaterial();        
-        sphereMaterial.map = THREE.ImageUtils.loadTexture("img/360/01.jpg")
+        sphereMaterial.map = THREE.ImageUtils.loadTexture(img_name)
         
         // geometry + material = mesh (actual object)
         var sphereMesh = new THREE.Mesh(sphere, sphereMaterial);
@@ -141,7 +160,7 @@ $$(document).on('pageAfterBack', function (e) {
     
     var page = e.detail.page;
 
-    if(page.name==="recorrido1"){
+    if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){
         $$(".page-content").css("padding-top", "44px");
         $$(".page-content").css("padding-bottom", "44px");
         $$(".page-content").css("overflow", "auto");
