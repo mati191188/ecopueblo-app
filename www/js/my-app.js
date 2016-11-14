@@ -7,7 +7,8 @@ var $$ = Dom7;
 // Add view
 var mainView = myApp.addView('.view-main', {
     // Because we want to use dynamic navbar, we need to enable it for this view:
-    dynamicNavbar: true    
+    dynamicNavbar: true,    
+    tapHold: true,
 });
 
 $$(document).on('deviceready', function() {
@@ -88,9 +89,11 @@ $$(document).on('pageAfterAnimation',function(e){
         // listeners
         document.addEventListener("mousedown", onDocumentMouseDown, false);
         document.addEventListener("mousemove", onDocumentMouseMove, false);
-        document.addEventListener("mouseup", onDocumentMouseUp, false);
+        document.addEventListener("mouseup", onDocumentMouseUp, false);      
 
-        document.addEventListener("swipe", onSwipe, false)        
+        document.addEventListener("touchstart", onDocumentTouchDown, false);
+        document.addEventListener("touchmove", onDocumentTouchMove, false);
+        document.addEventListener("touchend", onDocumentTouchUp, false);               
 						
         render();
             
@@ -130,6 +133,20 @@ $$(document).on('pageAfterAnimation',function(e){
             savedLatitude = latitude;
 
         }
+        
+        function onDocumentTouchDown(event){
+
+            event.preventDefault();
+
+            manualControl = true;
+
+            savedX = event.clientX;
+            savedY = event.clientY;
+
+            savedLongitude = longitude;
+            savedLatitude = latitude;
+
+        }
 
         // when the mouse moves, if in manual contro we adjust coordinates
         function onDocumentMouseMove(event){
@@ -141,12 +158,13 @@ $$(document).on('pageAfterAnimation',function(e){
 
         }
 
-        function onSwipe(event){
-          
+        function onDocumentTouchMove(event){
+
             if(manualControl){
                 longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
                 latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
-            }  
+            }
+
         }
 
         // when the mouse is released, we turn manual control off
@@ -156,13 +174,17 @@ $$(document).on('pageAfterAnimation',function(e){
 
         }
                 
+        function onDocumentTouchUp(event){
+            manualControl = false;
+        }
+
         // pressing a key (actually releasing it) changes the texture map
         document.onkeyup = function(event){
         
             panoramaNumber = (panoramaNumber + 1) % panoramasArray.length
             sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber])
         
-        }
+        }        
     }
 })
 
