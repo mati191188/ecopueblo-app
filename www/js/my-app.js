@@ -96,9 +96,9 @@ $$(document).on('pageAfterAnimation',function(e){
         document.addEventListener("mousemove", onDocumentMouseMove, false);
         document.addEventListener("mouseup", onDocumentMouseUp, false);      
 
-        //document.addEventListener("touchstart", onDocumentTouchDown, false);
+        document.addEventListener("touchstart", onDocumentTouchDown, false);
         document.addEventListener("touchmove", onDocumentTouchMove, false);
-        //document.addEventListener("touchend", onDocumentTouchUp, false);               
+        document.addEventListener("touchend", onDocumentTouchUp, false);               
 						
         render();
             
@@ -139,7 +139,7 @@ $$(document).on('pageAfterAnimation',function(e){
 
         }
         
-        /*function onDocumentTouchDown(event){
+        function onDocumentTouchDown(event){
 
             event.preventDefault();
 
@@ -148,10 +148,11 @@ $$(document).on('pageAfterAnimation',function(e){
             savedX = event.clientX;
             savedY = event.clientY;
 
-            savedLongitude = longitude;
-            savedLatitude = latitude;
-
-        }*/
+            //savedLongitude = longitude;
+            //savedLatitude = latitude;
+            savedLongitude = (savedX - event.clientX) * 0.1 + savedLongitude;
+            savedLatitude = (event.clientY - savedY) * 0.1 + savedLatitude              
+        }
 
         // when the mouse moves, if in manual contro we adjust coordinates
         function onDocumentMouseMove(event){
@@ -164,11 +165,12 @@ $$(document).on('pageAfterAnimation',function(e){
         }
 
         function onDocumentTouchMove(event){
+               
+            longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
+            latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
 
-            //if(manualControl){
-                longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
-                latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
-            //}
+            //alert(longitude);
+            //alert(latitude);
 
         }
 
@@ -179,9 +181,9 @@ $$(document).on('pageAfterAnimation',function(e){
 
         }
                 
-        /*function onDocumentTouchUp(event){
-            manualControl = false;
-        }*/      
+        function onDocumentTouchUp(event){
+            manualControl = false;            
+        }      
     }
 })
 
