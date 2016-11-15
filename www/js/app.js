@@ -13,10 +13,13 @@ var mainView = myApp.addView('.view-main', {
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
 
-    $$(".page-content").css("padding-top", "44px");
-    $$(".page-content").css("padding-bottom", "44px");
-    $$(".page-content").css("overflow", "auto");
+    //$$(".page-content").css("padding-top", "44px");
+    //$$(".page-content").css("padding-bottom", "44px");
+    //$$(".page-content").css("overflow", "auto");
 });
+
+myApp.onPageInit('recorridos', function (page) {})
+myApp.onPageInit('lotes', function (page) {})
 
 myApp.onPageAfterAnimation('recorrido1', function (page) {})
 myApp.onPageAfterAnimation('recorrido2', function (page) {})
@@ -31,7 +34,6 @@ myApp.onPageAfterBack('recorrido4', function (page) {})
 $$(document).on('pageInit', function (e) {
     
     var page = e.detail.page;
-
 
 })
 
@@ -183,14 +185,20 @@ $$(document).on('pageAfterAnimation',function(e){
             manualControl = false;
         }
     }
+
+    if(page.name === 'recorridos' || page.name === 'lotes'){           
+        myApp.closePanel();    
+    }
 })
 
 $$(document).on('pageAfterBack', function (e) {
     
     var page = e.detail.page;
     
-    $$(".page-content").css("padding-top", "44px");
-    $$(".page-content").css("padding-bottom", "44px");
-    $$(".page-content").css("overflow", "auto");
+    //if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){
+        //$$(".page-content").css("padding-top", "44px");
+        //$$(".page-content").css("padding-bottom", "44px");
+        //$$(".page-content").css("overflow", "auto");
+    //}
     
 })
