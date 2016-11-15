@@ -97,10 +97,7 @@ $$(document).on('pageAfterAnimation',function(e){
         document.addEventListener("mouseup", onDocumentMouseUp, false);      
 
         document.addEventListener("touchstart", onDocumentTouchDown, false);
-        document.addEventListener("touchmove", onDocumentTouchMove, false);
-        document.addEventListener("touchend", onDocumentTouchUp, false);            
-
-        http://stackoverflow.com/questions/8307135/iphone-javascript-events-for-three-js   
+        document.addEventListener("touchmove", onDocumentTouchMove, false);                  
 						
         render();
             
@@ -143,17 +140,14 @@ $$(document).on('pageAfterAnimation',function(e){
         
         function onDocumentTouchDown(event){
 
-            event.preventDefault();
+            if ( event.touches.length == 1 ) {
 
-            manualControl = true;
+                event.preventDefault();
 
-            savedX = event.clientX;
-            savedY = event.clientY;
+                mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
+                targetRotationOnMouseDown = targetRotation;
 
-            //savedLongitude = longitude;
-            //savedLatitude = latitude;
-            savedLongitude = (savedX - event.clientX) * 0.1 + savedLongitude;
-            savedLatitude = (event.clientY - savedY) * 0.1 + savedLatitude              
+            }      
         }
 
         // when the mouse moves, if in manual contro we adjust coordinates
@@ -168,11 +162,14 @@ $$(document).on('pageAfterAnimation',function(e){
 
         function onDocumentTouchMove(event){
                
-            longitude = (savedX - event.clientX) * 0.1 + savedLongitude;
-            latitude = (event.clientY - savedY) * 0.1 + savedLatitude;
+            if ( event.touches.length == 1 ) {
 
-            //alert(longitude);
-            //alert(latitude);
+                event.preventDefault();
+
+                mouseX = event.touches[ 0 ].pageX - windowHalfX;
+                targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
+
+            }
 
         }
 
@@ -181,11 +178,7 @@ $$(document).on('pageAfterAnimation',function(e){
 
             manualControl = false;
 
-        }
-                
-        function onDocumentTouchUp(event){
-            manualControl = false;            
-        }      
+        }     
     }
 })
 
