@@ -98,7 +98,9 @@ $$(document).on('pageAfterAnimation',function(e){
 
         document.addEventListener("touchstart", onDocumentTouchDown, false);
         document.addEventListener("touchmove", onDocumentTouchMove, false);
-        document.addEventListener("touchend", onDocumentTouchUp, false);               
+        document.addEventListener("touchend", onDocumentTouchUp, false);            
+
+        http://stackoverflow.com/questions/8307135/iphone-javascript-events-for-three-js   
 						
         render();
             
