@@ -181,15 +181,7 @@ $$(document).on('pageAfterAnimation',function(e){
                 
         function onDocumentTouchUp(event){
             manualControl = false;
-        }
-
-        // pressing a key (actually releasing it) changes the texture map
-        document.onkeyup = function(event){
-        
-            panoramaNumber = (panoramaNumber + 1) % panoramasArray.length
-            sphereMaterial.map = THREE.ImageUtils.loadTexture(panoramasArray[panoramaNumber])
-        
-        }        
+        }      
     }
 })
 
