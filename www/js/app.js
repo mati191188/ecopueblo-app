@@ -96,8 +96,9 @@ $$(document).on('pageAfterAnimation',function(e){
         document.addEventListener("mousemove", onDocumentMouseMove, false);
         document.addEventListener("mouseup", onDocumentMouseUp, false);      
 
-        document.addEventListener("touchstart", onDocumentTouchDown, false);
-        document.addEventListener("touchmove", onDocumentTouchMove, false);                  
+        document.addEventListener("touchstart",onDocumentMouseDowns, false);
+        document.addEventListener("touchmove",onDocumentMouseMoves, false);
+        document.addEventListener("touchend", onDocumentMouseUps, false);                 
 						
         render();
             
@@ -137,19 +138,6 @@ $$(document).on('pageAfterAnimation',function(e){
             savedLatitude = latitude;
 
         }
-        
-        function onDocumentTouchDown(event){
-
-            if ( event.touches.length == 1 ) {
-
-                event.preventDefault();
-
-                mouseXOnMouseDown = event.touches[ 0 ].pageX - windowHalfX;
-                targetRotationOnMouseDown = targetRotation;
-
-            }      
-        }
-
         // when the mouse moves, if in manual contro we adjust coordinates
         function onDocumentMouseMove(event){
 
@@ -159,26 +147,41 @@ $$(document).on('pageAfterAnimation',function(e){
             }
 
         }
-
-        function onDocumentTouchMove(event){
-               
-            if ( event.touches.length == 1 ) {
-
-                event.preventDefault();
-
-                mouseX = event.touches[ 0 ].pageX - windowHalfX;
-                targetRotation = targetRotationOnMouseDown + ( mouseX - mouseXOnMouseDown ) * 0.05;
-
-            }
-
-        }
-
         // when the mouse is released, we turn manual control off
         function onDocumentMouseUp(event){
+            manualControl = false;            
+        }
 
+
+        function onDocumentMouseDowns(event)
+        {
+            event.preventDefault();
+
+            manualControl = true;
+
+            savedX = event.touches[0].clientX;
+            savedY = event.touches[0].clientY;
+
+            savedLongitude = longitude;
+            savedLatitude = latitude;
+
+            //alert(“down”+savedX+”–“+savedY+”–“+savedLatitude+”–“+savedLongitude)
+        }
+        // when the mouse moves, if in manual contro we adjust coordinates
+        function onDocumentMouseMoves(event)
+        {
+
+            if(manualControl){
+                longitude = (savedX - event.touches[0].clientX) * 0.1 + savedLongitude;
+                latitude = (event.touches[0].clientY - savedY) * 0.1 + savedLatitude;
+                //alert(“move”+longitude+”–“+latitude)
+            }   
+
+        }
+        // when the mouse is released, we turn manual control off
+        function onDocumentMouseUps(event){
             manualControl = false;
-
-        }     
+        }
     }
 })
 
