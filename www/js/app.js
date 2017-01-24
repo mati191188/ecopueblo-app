@@ -186,8 +186,29 @@ $$(document).on('pageAfterAnimation',function(e){
         }
     }
 
-    if(page.name === 'recorridos' || page.name === 'lotes'){           
+    if(page.name === 'recorridos' || page.name === 'lotes' || page.name === 'lugares' || page.name === 'ecoinfo' || page.name === 'monitoreo'){           
         myApp.closePanel();    
+    }
+
+    if(page.name === 'ecoinfo'){
+        // Select Template
+        var template = $$('#random-template').html();
+
+        // Compile and render
+        var compiledTemplate = Template7.compile(template);
+
+        // Defined as function "getrandom"
+        function getrandom() {
+          // Get JSON Data from UrbanDictionary API 
+          $$.getJSON('http://app.ecopueblo.com/api/mapas', function (json) {
+             console.log(compiledTemplate(json));
+            // Insert rendered template
+            $$('#content-wrap').html(compiledTemplate(json))
+          });
+        };
+
+        // Execute to list UrbanDictionary Definitions
+        getrandom();   
     }
 })
 
@@ -202,3 +223,5 @@ $$(document).on('pageAfterBack', function (e) {
     //}
     
 })
+
+

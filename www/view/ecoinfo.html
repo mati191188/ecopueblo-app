@@ -1,0 +1,57 @@
+<!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->            
+
+<!-- Top Navbar-->
+<div class="navbar">
+    <div class="navbar-inner">
+        <div class="left">
+            <a href="#" class="back link">
+                <i class="icon icon-back"></i>
+                <span>Atras</span>
+            </a>
+        </div>
+        <div class="center sliding">Eco Info</div>
+        <div class="right">
+            <!--<a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>-->
+        </div>
+    </div>
+</div>
+<div class="pages">    
+    <div data-page="ecoinfo" class="page">
+        <div class="page-content">                        
+            <div class="content-block" style="margin-top: 71px;">  
+                <div class="content-block-title">Eco Info</div>
+                
+
+                    <!-- Pull to Refresh -->
+                    <div class="pull-to-refresh-layer">
+                      <div class="preloader"></div>
+                      <div class="pull-to-refresh-arrow"></div>
+                    </div>
+                    
+                    <!-- Div for Result -->
+                    <div id="content-wrap"></div>
+                    
+                    <!-- Template7 Template -->
+                    <script id="random-template" type="text/template7">
+                      <div class="list-block media-list">
+                        <ul>
+                          {{#each data}}
+                          <li>
+                            <a href="#" class="item-link item-content external" target="_blank">
+                              <div class="item-inner">
+                                <div class="item-title-row">
+                                  <div class="item-title">{{id}}</div>
+                                  <div class="item-after">{{nombre}}</div>
+                                </div>                                
+                              </div>
+                            </a>
+                          </li>
+                          {{/each}}
+                        </ul>
+                      </div>
+                    </script>            
+
+            </div>
+        </div>
+    </div>
+</div>
