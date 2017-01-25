@@ -1,31 +1,53 @@
-<!-- We don't need a full layout in this file because this page will be parsed with Ajax. -->            
-
-<!-- Top Navbar-->
-<div class="navbar">
-    <div class="navbar-inner">
-        <div class="left">
-            <a href="#" class="back link">
-                <i class="icon icon-back"></i>
-                <span>Atras</span>
-            </a>
-        </div>
-        <div class="center sliding">Lugares</div>
-        <div class="right">
-            <!--<a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>-->
-        </div>
-    </div>
-</div>
-<div class="pages">    
-    <div data-page="lugares" class="page">
-        <div class="page-content">                        
-            <div class="content-block" style="margin-top: 71px;">  
-                <div class="content-block-title">Lugares</div>
-                <div class="list-block inset">
-                    <ul>
-                        
-                    </ul>
-                </div>
+<div class="page" data-page="lugares">
+    <div class="navbar navbar-custom">
+        <div class="navbar-inner">
+            <div class="left">                
+                <a href="#" class="back link"> <i class="icon icon-back"></i> <span>Atras</span> </a>
+            </div>
+            <div class="right">
+                <a href="#" class="link">Lugares</a>
             </div>
         </div>
     </div>
-</div>
+    <div class="page-content">
+        
+    
+            <div class="pull-to-refresh-layer">
+              <div class="preloader"></div>                      
+            </div>                          
+
+            <div id="content-wrap"></div>              
+
+            <script id="random-template" type="text/template7">
+                {{#each this.data}}
+                          
+                    <div class="content-block-title">{{grupo.nombre}}</div>
+                    <div class="list-block accordion-list">
+                        <ul>
+                            {{#each grupo.lugares}}
+                                <li class="accordion-item">
+                                    <a href="" class="item-link item-content">
+                                        <div class="item-inner">
+                                            <div class="item-title">{{nombre}}</div>
+                                        </div>
+                                    </a> 
+                                    <div class="accordion-item-content">
+                                        <div class="content-block">
+                                            <p>
+                                                <b>Laitud:</b>{{latitud}} <br>
+                                                <b>Longitud:</b>{{longitud}} <br>
+                                                <a href='http://maps.google.com/maps?q={{latitud}},+{{longitud}}&hl=es'>Ver Mapa</a>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </li>
+                            {{/each}}                                  
+                        </ul>
+                    </div>
+                    
+                {{/each}}                      
+            </script>                            
+
+        
+    </div>
+</div> 

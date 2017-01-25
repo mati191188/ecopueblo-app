@@ -1,60 +1,34 @@
-// Initialize app
-var myApp = new Framework7();
+var myApp = new Framework7({
+    material: true,
+});
 
-// If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
-// Add view
-var mainView = myApp.addView('.view-main', {
-    // Because we want to use dynamic navbar, we need to enable it for this view:
+var mainView = myApp.addView('.view-main', {    
     dynamicNavbar: true    
 });
 
-$$(document).on('deviceready', function() {
-    console.log("Device is ready!");
 
-    //$$(".page-content").css("padding-top", "44px");
-    //$$(".page-content").css("padding-bottom", "44px");
-    //$$(".page-content").css("overflow", "auto");
-});
-
-myApp.onPageInit('recorridos', function (page) {})
-myApp.onPageInit('lotes', function (page) {})
-
-myApp.onPageAfterAnimation('recorrido1', function (page) {})
-myApp.onPageAfterAnimation('recorrido2', function (page) {})
-myApp.onPageAfterAnimation('recorrido3', function (page) {})
-myApp.onPageAfterAnimation('recorrido4', function (page) {})
-
-myApp.onPageAfterBack('recorrido1', function (page) {})
-myApp.onPageAfterBack('recorrido2', function (page) {})
-myApp.onPageAfterBack('recorrido3', function (page) {})
-myApp.onPageAfterBack('recorrido4', function (page) {})
-
-$$(document).on('pageInit', function (e) {
-    
-    var page = e.detail.page;
-
-})
-
+//RECORRIDOS 360 CONFIGURACION UNIFICADA
 $$(document).on('pageAfterAnimation',function(e){
 
-    var page= e.detail.page;
-    var img_name = null;
+    var page= e.detail.page;    
 
-    if(page.name === 'recorrido1')
-        var img_name = "img/360/01.jpg";
+    if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){        
 
-    if(page.name === 'recorrido2')
-        var img_name = "img/360/02.jpg";
+        var img_name = null;
 
-    if(page.name === 'recorrido3')
-        var img_name = "img/360/03.jpg";
+        if(page.name === 'recorrido1')
+            var img_name = "img/360/01.jpg";
 
-    if(page.name === 'recorrido4')
-        var img_name = "img/360/04.jpg";
+        if(page.name === 'recorrido2')
+            var img_name = "img/360/02.jpg";
 
-    if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){
+        if(page.name === 'recorrido3')
+            var img_name = "img/360/03.jpg";
+
+        if(page.name === 'recorrido4')
+            var img_name = "img/360/04.jpg";
 
         var manualControl = false;
         var longitude = 0;
@@ -70,7 +44,7 @@ $$(document).on('pageAfterAnimation',function(e){
         $$(".page-content").append(renderer.domElement);        
         $$(".page-content").css("padding-top", "0px");
         $$(".page-content").css("padding-bottom", "0px");
-        $$(".page-content").css("overflow", "inherit");        
+        $$(".page-content").css("overflow", "inherit");               
         $$("canvas").css("width", "100%");
         $$("canvas").css("height", "100%");
         
@@ -186,42 +160,95 @@ $$(document).on('pageAfterAnimation',function(e){
         }
     }
 
-    if(page.name === 'recorridos' || page.name === 'lotes' || page.name === 'lugares' || page.name === 'ecoinfo' || page.name === 'monitoreo'){           
+    if(page.name === 'recorridos' || page.name === 'lotes' || page.name === 'lugares' || page.name === 'ecoinfo' || page.name === 'monitoreo'){
+
         myApp.closePanel();    
-    }
+    }    
 
-    if(page.name === 'ecoinfo'){
-        // Select Template
-        var template = $$('#random-template').html();
-
-        // Compile and render
-        var compiledTemplate = Template7.compile(template);
-
-        // Defined as function "getrandom"
-        function getrandom() {
-          // Get JSON Data from UrbanDictionary API 
-          $$.getJSON('http://app.ecopueblo.com/api/mapas', function (json) {
-             console.log(compiledTemplate(json));
-            // Insert rendered template
-            $$('#content-wrap').html(compiledTemplate(json))
-          });
-        };
-
-        // Execute to list UrbanDictionary Definitions
-        getrandom();   
+    if(page.name ==='recorridos'){
+        $$(".page-content").css("padding-top", "50px");        
     }
 })
 
-$$(document).on('pageAfterBack', function (e) {
-    
-    var page = e.detail.page;
-    
-    //if(page.name === 'recorrido1' || page.name === 'recorrido2' || page.name === 'recorrido3' || page.name === 'recorrido4'){
-        //$$(".page-content").css("padding-top", "44px");
-        //$$(".page-content").css("padding-bottom", "44px");
-        //$$(".page-content").css("overflow", "auto");
-    //}
+
+//RECORRIDOS 
+myApp.onPageReinit('recorridos', function (page) {
+
+    $$(".page-content").css("padding-top", "50px");
+})
+
+//LOTES 
+myApp.onPageAfterAnimation('lotes', function (page) {
+
+    var myPhotoBrowserPage = myApp.photoBrowser({
+        photos : [
+            'http://lorempixel.com/1024/1024/sports/3/',
+        ],                
+        theme: 'dark',
+        onClose: function () {
+            mainView.router.loadPage('index.html');
+        }
+    });
+
+    myPhotoBrowserPage.open();    
+})
+
+//ECOINFO 
+myApp.onPageInit('ecoinfo', function (page) {
+    // Select Template
+    var template = $$('#random-template').html();
+
+    // Compile and render
+    var compiledTemplate = Template7.compile(template);
+              
+    $$.getJSON('http://app.ecopueblo.com/api/mapas', function (json) {                     
+        $$('#content-wrap').html(compiledTemplate(json));
+        console.log(compiledTemplate(json));
+    }); 
     
 })
 
+myApp.onPageAfterAnimation('ecoinfo', function (page) {
 
+    /*=== Popup ===*/
+    var myPhotoBrowserPopup = myApp.photoBrowser({
+        photos : [
+            {
+                url:'http://lorempixel.com/1024/1024/sports/1/',
+                caption:'Primera',
+            },
+            {
+                url:'http://lorempixel.com/1024/1024/sports/2/',
+                caption:'Segunda',
+            },
+            {
+                url:'http://lorempixel.com/1024/1024/sports/3/',
+                caption:'Tercera',
+            },            
+        ],
+        type: 'popup',
+        theme: 'dark',
+    });
+    $$('.pb-popup').on('click', function () {
+        myPhotoBrowserPopup.open();        
+    });
+})
+
+
+//LUGARES 
+myApp.onPageInit('lugares', function (page) {
+    // Select Template
+    var template = $$('#random-template').html();
+
+    // Compile and render
+    var compiledTemplate = Template7.compile(template);
+              
+    $$.getJSON('http://app.ecopueblo.com/api/puntos-interes', function (json) {                     
+        $$('#content-wrap').html(compiledTemplate(json));
+        console.log(compiledTemplate(json));
+    });        
+})
+
+
+
+ 
