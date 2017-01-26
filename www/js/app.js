@@ -182,7 +182,7 @@ myApp.onPageAfterAnimation('lotes', function (page) {
 
     var myPhotoBrowserPage = myApp.photoBrowser({
         photos : [
-            'http://lorempixel.com/1024/1024/sports/3/',
+            'img/lotes/mapas.jpg',
         ],                
         theme: 'dark',
         onClose: function () {

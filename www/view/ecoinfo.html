@@ -18,25 +18,22 @@
 
             <div id="content-wrap"></div>              
 
-            <ul>
-              <script id="random-template" type="text/template7">
-                <div class="list-block">
-                  <ul>
-                    {{#each data}}
-                      <li>
-                        <a href="#" class="item-link item-content" id='pb-popup-{{id}}' >
-                          <div class="item-media"><i class="icon icon-{{id}}"></i></div>
-                          <div class="item-inner">
-                            <div class="item-title">{{nombre}}</div>
-                            <div class="item-after"></div>
-                          </div>
-                        </a>
-                      </li>
-                    {{/each}}                                  
-                  </ul>
-                </div>
-              </script>                
-            </ul>
+            
+            <script id="random-template" type="text/template7">
+
+              <div class="row">
+                {{#each data}}                                      
+                  <div class="col-50">
+                    <a href="#" class="item-link item-content" id='pb-popup-{{id}}' >
+                      <div style="background-image:url('{{ruta}}'); height: 40vw; background-size: cover; background-position: center;" valign="bottom" class="card-header color-white no-border">
+                        <p style="background-color: #1aa772; padding: 5px; border-radius: 10px;"> {{nombre}} </p>
+                      </div>
+                    </a>
+                  </div>                                                          
+                {{/each}} 
+              </div>
+              
+            </script>                            
             
         </div>
     </div>
