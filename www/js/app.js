@@ -178,6 +178,24 @@ myApp.onPageReinit('recorridos', function (page) {
 })
 
 //LOTES 
+myApp.onPageInit('lotes', function (page) {
+
+    var url_api = 'http://app.ecopueblo.com/api/lotes-libres';
+    //var url_api = 'http://localhost:8000/api/lotes-libres';
+
+    // Select Template
+    var template = $$('#random-template').html();
+
+    // Compile and render
+    var compiledTemplate = Template7.compile(template);
+              
+    $$.getJSON(url_api, function (json) {                     
+        $$('#content-wrap').html(compiledTemplate(json));
+        console.log(compiledTemplate(json));
+    }); 
+    
+})
+
 myApp.onPageAfterAnimation('lotes', function (page) {
 
     var myPhotoBrowserPage = myApp.photoBrowser({
@@ -195,13 +213,17 @@ myApp.onPageAfterAnimation('lotes', function (page) {
 
 //ECOINFO 
 myApp.onPageInit('ecoinfo', function (page) {
+
+    var url_api = 'http://app.ecopueblo.com/api/mapas';
+    //var url_api = 'http://localhost:8000/api/mapas';
+
     // Select Template
     var template = $$('#random-template').html();
 
     // Compile and render
     var compiledTemplate = Template7.compile(template);
               
-    $$.getJSON('http://app.ecopueblo.com/api/mapas', function (json) {                     
+    $$.getJSON(url_api, function (json) {                     
         $$('#content-wrap').html(compiledTemplate(json));
         console.log(compiledTemplate(json));
     }); 
@@ -237,13 +259,16 @@ myApp.onPageAfterAnimation('ecoinfo', function (page) {
 
 //LUGARES 
 myApp.onPageInit('lugares', function (page) {
+    var url_api = 'http://app.ecopueblo.com/api/puntos-interes';
+    //var url_api = 'http://localhost:3000/api/puntos-interes';
+
     // Select Template
     var template = $$('#random-template').html();
 
     // Compile and render
     var compiledTemplate = Template7.compile(template);
               
-    $$.getJSON('http://app.ecopueblo.com/api/puntos-interes', function (json) {                     
+    $$.getJSON(url_api, function (json) {                     
         $$('#content-wrap').html(compiledTemplate(json));
         console.log(compiledTemplate(json));
     });        
